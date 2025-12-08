@@ -15,19 +15,21 @@ A complete **microservices-based order and notification platform** built with mo
 
 ## 🏗 Architecture
 
-The platform consists of 6 microservices communicating asynchronously via RabbitMQ:
+The platform consists of 6 microservices in a **polyglot architecture** communicating asynchronously via RabbitMQ:
 
 ```
 ┌─────────────┐     ┌──────────────┐     ┌────────────────┐
 │   React     │────▶│   Gateway    │────▶│ Auth Service   │
-│  Frontend   │     │   Service    │     │ (JWT/Security) │
-└─────────────┘     └──────────────┘     └────────────────┘
+│  Frontend   │     │   Service    │     │ (Flask/Python) │
+└─────────────┘     │  (Java)      │     └────────────────┘
+                    └──────────────┘              
                            │
           ┌────────────────┼────────────────┐
           │                │                │
     ┌─────▼──────┐  ┌──────▼─────┐  ┌──────▼──────┐
     │  Catalog   │  │ Inventory  │  │   Order     │
     │  Service   │  │  Service   │  │  Service    │
+    │ (NestJS)   │  │  (Java)    │  │  (Java)     │
     └────────────┘  └─────┬──────┘  └──────┬──────┘
                           │                 │
                     ┌─────▼─────────────────▼─────┐
@@ -38,8 +40,14 @@ The platform consists of 6 microservices communicating asynchronously via Rabbit
                          ┌────────▼────────┐
                          │  Notification   │
                          │    Service      │
+                         │    (Java)       │
                          └─────────────────┘
 ```
+
+**Technology Stack:**
+- **Auth Service**: Python 3.12 + Flask + SQLAlchemy
+- **Catalog Service**: TypeScript + NestJS + TypeORM
+- **Gateway/Inventory/Order/Notification**: Java 23 + Spring Boot
 
 **Event Flow:**
 1. User places order → `order.created` event published
@@ -50,7 +58,23 @@ The platform consists of 6 microservices communicating asynchronously via Rabbit
 
 ## 🚀 Technologies
 
-### Backend
+### Backend Microservices
+**Auth Service (Python/Flask)**:
+- **Python 3.12** - Modern Python
+- **Flask 3.0** - Lightweight framework
+- **SQLAlchemy** - Python ORM
+- **PyJWT** - JWT authentication
+- **Bcrypt** - Password hashing
+- **Flasgger** - Swagger documentation
+
+**Catalog Service (TypeScript/NestJS)**:
+- **TypeScript** - Type-safe JavaScript
+- **NestJS 10** - Progressive Node.js framework
+- **TypeORM** - TypeScript ORM
+- **class-validator** - Validation
+- **Swagger** - API documentation
+
+**Inventory/Order/Notification Services (Java/Spring Boot)**:
 - **Java 23** - Latest Java features
 - **Spring Boot 3.2** - Microservices framework
 - **Spring Cloud Gateway** - API Gateway
@@ -77,13 +101,15 @@ The platform consists of 6 microservices communicating asynchronously via Rabbit
 ```
 Order-Notification-Platform/
 ├── backend/
-│   ├── shared-lib/              # Shared events and DTOs
-│   ├── gateway-service/         # API Gateway (Port 8080)
-│   ├── auth-service/            # Authentication (Port 8081)
-│   ├── catalog-service/         # Product Catalog (Port 8082)
-│   ├── inventory-service/       # Stock Management (Port 8083)
-│   ├── order-service/           # Order Management (Port 8084)
-│   └── notification-service/    # Notifications (Port 8085)
+│   ├── shared-lib/              # Shared events and DTOs (Java)
+│   ├── gateway-service/         # API Gateway (Java - Port 8080)
+│   ├── auth-service-flask/      # Authentication (Python/Flask - Port 8081) ⭐ NEW
+│   ├── catalog-service-nestjs/  # Product Catalog (TypeScript/NestJS - Port 8082) ⭐ NEW
+│   ├── inventory-service/       # Stock Management (Java - Port 8083)
+│   ├── order-service/           # Order Management (Java - Port 8084)
+│   ├── notification-service/    # Notifications (Java - Port 8085)
+│   ├── auth-service/            # [Archived] Original Java version
+│   └── catalog-service/         # [Archived] Original Java version
 ├── frontend/
 │   └── react-app/               # React Frontend (Port 3000)
 ├── infrastructure/
@@ -91,7 +117,9 @@ Order-Notification-Platform/
 │   │   └── docker-compose.yml   # Local deployment
 │   ├── kubernetes/              # K8s manifests
 │   └── terraform/               # Infrastructure provisioning
-└── README.md
+├── README.md
+├── MIGRATION.md                 # ⭐ Migration guide for new services
+└── QUICK_START.md
 ```
 
 ## ✅ Prerequisites
