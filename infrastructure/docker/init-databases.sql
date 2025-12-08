@@ -1,0 +1,5 @@
+-- Create databases for each service
+CREATE DATABASE IF NOT EXISTS authdb;
+CREATE DATABASE IF NOT EXISTS catalogdb;
+CREATE DATABASE IF NOT EXISTS inventorydb;
+CREATE DATABASE IF NOT EXISTS orderdb;

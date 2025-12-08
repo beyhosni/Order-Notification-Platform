@@ -1,0 +1,13 @@
+# Example terraform.tfvars file
+# Copy this to terraform.tfvars and update with your values
+
+kubeconfig_path = "~/.kube/config"
+namespace       = "order-platform"
+
+postgres_user     = "postgres"
+postgres_password = "your-secure-password-here"
+
+rabbitmq_user     = "guest"
+rabbitmq_password = "your-rabbitmq-password-here"
+
+jwt_secret = "your-jwt-secret-key-min-256-bits-long"
