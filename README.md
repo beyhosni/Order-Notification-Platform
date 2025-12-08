@@ -103,13 +103,11 @@ Order-Notification-Platform/
 ├── backend/
 │   ├── shared-lib/              # Shared events and DTOs (Java)
 │   ├── gateway-service/         # API Gateway (Java - Port 8080)
-│   ├── auth-service-flask/      # Authentication (Python/Flask - Port 8081) ⭐ NEW
-│   ├── catalog-service-nestjs/  # Product Catalog (TypeScript/NestJS - Port 8082) ⭐ NEW
+│   ├── auth-service-flask/      # Authentication (Python/Flask - Port 8081)
+│   ├── catalog-service-nestjs/  # Product Catalog (TypeScript/NestJS - Port 8082)
 │   ├── inventory-service/       # Stock Management (Java - Port 8083)
 │   ├── order-service/           # Order Management (Java - Port 8084)
-│   ├── notification-service/    # Notifications (Java - Port 8085)
-│   ├── auth-service/            # [Archived] Original Java version
-│   └── catalog-service/         # [Archived] Original Java version
+│   └── notification-service/    # Notifications (Java - Port 8085)
 ├── frontend/
 │   └── react-app/               # React Frontend (Port 3000)
 ├── infrastructure/
@@ -118,7 +116,7 @@ Order-Notification-Platform/
 │   ├── kubernetes/              # K8s manifests
 │   └── terraform/               # Infrastructure provisioning
 ├── README.md
-├── MIGRATION.md                 # ⭐ Migration guide for new services
+├── MIGRATION.md                 # Migration guide
 └── QUICK_START.md
 ```
 
