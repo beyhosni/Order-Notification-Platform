@@ -22,6 +22,14 @@ jwt:
   secret: your-secret-key-change-this-in-production-min-256-bits-long
   expiration: 86400000
 
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+    operationsSorter: method
+    tagsSorter: alpha
+
 logging:
   level:
     com.platform.auth: DEBUG
