@@ -33,10 +33,11 @@ public class OrderService {
         order.setUserId(request.getUserId());
         order.setStatus(Order.OrderStatus.PENDING);
 
-        // Create order items
+        // Create order items - capture final reference for lambda
+        final Order finalOrder = order;
         List<OrderItem> items = request.getItems().stream().map(itemReq -> {
             OrderItem item = new OrderItem();
-            item.setOrder(order);
+            item.setOrder(finalOrder);
             item.setProductId(itemReq.getProductId());
             item.setProductName(itemReq.getProductName());
             item.setQuantity(itemReq.getQuantity());

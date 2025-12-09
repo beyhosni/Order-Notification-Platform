@@ -1,5 +1,6 @@
 -- Create databases for each service
-CREATE DATABASE IF NOT EXISTS authdb;
-CREATE DATABASE IF NOT EXISTS catalogdb;
-CREATE DATABASE IF NOT EXISTS inventorydb;
-CREATE DATABASE IF NOT EXISTS orderdb;
+-- Note: Databases will only be created if they don't exist (checked by PostgreSQL)
+CREATE DATABASE authdb;
+CREATE DATABASE catalogdb;
+CREATE DATABASE inventorydb;
+CREATE DATABASE orderdb;
